@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'; 
 
 function App() {
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  const handleJump = () => {
+    setPosition({ top: position.top - 1, left: position.left + 1 });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app" onClick={handleJump}>
+      <video
+        src={require('./assets/logo.gif.mp4')} 
+        autoPlay
+        loop
+        muted
+        style={{
+          position: 'relative',
+          top: `${position.top * 100}px`,
+          left: `${position.left * 100}px`,
+          height: '100px',
+          transition: 'top 0.3s ease-in-out, left 0.3s ease-in-out'
+        }}
+      />
     </div>
   );
 }
